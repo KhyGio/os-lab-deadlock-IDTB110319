@@ -1,4 +1,4 @@
-# os-lab-deadlock-IDTB110319
+<img width="1318" height="293" alt="image" src="https://github.com/user-attachments/assets/594b26cc-d36b-4f74-8f2a-5504ae40b1a2" /># os-lab-deadlock-IDTB110319
 
 ## Checkpoint 1 — Loop devices mounted
 
@@ -36,3 +36,10 @@ first step without holding anything, so no cycle can form.
 `sync_timeout` uses `flock -w 5` to wait a maximum of 5 seconds for the
 Alpha lock. If the lock is held by another process past that window, the
 script aborts with a clear error instead of freezing.
+
+## Checkpoint 6 — Safe ejection
+
+![App Screenshot](img/checkpoint6.png)
+Teardown completed successfully. Both loop devices were detached from the
+kernel and symlinks removed. The .img files remain intact, confirming the
+filesystem was not corrupted during unmounting.
