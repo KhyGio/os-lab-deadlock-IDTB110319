@@ -12,3 +12,12 @@ The output of `df -h | grep loop` confirms that both virtual disk images (`vault
 `sync_down` locked Vault Beta then waited for Vault Alpha. Each script held
 exactly what the other needed, creating a circular wait — a classic deadlock.
 Neither process could continue until manually killed with Ctrl+C.
+
+## Checkpoint 3 — Cross-user deadlock
+
+![App Screenshot](img/checkpoint2.png)
+`cross_sync_beta` locked our local Beta vault then waited for Player A's
+Alpha vault. Simultaneously, Player A's `cross_sync_alpha` locked their
+Alpha vault then waited for our Beta vault. Both accounts froze in a
+circular wait across two users — neither could proceed without the other
+releasing first.
