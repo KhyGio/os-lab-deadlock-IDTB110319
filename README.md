@@ -29,3 +29,10 @@ Both scripts now acquire locks in the same strict order: Alpha first, Beta secon
 This eliminates circular wait — one of the four necessary conditions for deadlock.
 Whichever script wins the Alpha lock proceeds unblocked. The other waits at the
 first step without holding anything, so no cycle can form.
+
+## Checkpoint 5 — Deadlock recovery via timeout
+
+![App Screenshot](img/checkpoint5.png)
+`sync_timeout` uses `flock -w 5` to wait a maximum of 5 seconds for the
+Alpha lock. If the lock is held by another process past that window, the
+script aborts with a clear error instead of freezing.
