@@ -15,9 +15,17 @@ Neither process could continue until manually killed with Ctrl+C.
 
 ## Checkpoint 3 — Cross-user deadlock
 
-![App Screenshot](img/checkpoint2.png)
+![App Screenshot](img/checkpoint3.png)
 `cross_sync_beta` locked our local Beta vault then waited for Player A's
 Alpha vault. Simultaneously, Player A's `cross_sync_alpha` locked their
 Alpha vault then waited for our Beta vault. Both accounts froze in a
 circular wait across two users — neither could proceed without the other
 releasing first.
+
+## Checkpoint 4 — Global resource ordering
+
+![App Screenshot](img/checkpoint4.png)
+Both scripts now acquire locks in the same strict order: Alpha first, Beta second.
+This eliminates circular wait — one of the four necessary conditions for deadlock.
+Whichever script wins the Alpha lock proceeds unblocked. The other waits at the
+first step without holding anything, so no cycle can form.
